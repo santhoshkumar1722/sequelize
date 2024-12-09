@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       course.belongsTo(models.user, {
-        foreignKey: 'user_id',
+        foreignKey: 'instructor_id',
         onDelete: 'CASCADE',
       });
     }
@@ -23,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       references: {
         model: "users",
-        key: "user_id",
+        key: "id",
       },
       onDelete: "CASCADE",
     },

@@ -72,6 +72,7 @@ const courseRatingController = {
       res.status(500).send(err.message);
     }
   },
+  
 };
 
 module.exports = courseRatingController;

@@ -26,9 +26,9 @@ app.use(bodyParser.json());
 // Routes
 app.use("/auth", authRoutes);
 app.use("/api",coursePromotionRoutes); 
-app.use(courseRoutes);
-app.use(courseCategoryRoutes);
-app.use(couponRoutes);
+app.use("/api",courseRoutes);
+app.use("/api",courseCategoryRoutes);
+app.use("/api",couponRoutes);
 app.use("/api", notificationRoutes);
 app.use("/api", forumPostRoutes);
 app.use("/api", quizRoutes);

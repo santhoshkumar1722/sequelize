@@ -16,14 +16,14 @@ const authController = {
         password: hashedPassword,
         first_name,
         last_name,
-        user_role,
-        date_joined: new Date(),
+        user_role
       });
       res.status(201).json({ message: 'User registered successfully!', user: newUser });
     } catch (err) {
       res.status(500).send(err.message);
     }
   },
+  
   async login(req, res) {
     const { email, password } = req.body;
 
@@ -63,6 +63,7 @@ const authController = {
       res.status(500).send(err.message);
     }
   },
+
   async updateProfile(req, res) {
     const userId = req.params.id;
 
@@ -83,6 +84,7 @@ const authController = {
       res.status(500).send(err.message);
     }
   },
+
   async deleteUser(req, res) {
     const userId = req.params.id;
 
@@ -101,9 +103,6 @@ const authController = {
       res.status(500).send(err.message);
     }
   },
-
-
-
 
 };
 

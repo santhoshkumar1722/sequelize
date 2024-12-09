@@ -2,21 +2,21 @@
   "development": {
     "username": "postgres",
     "password": "santhosh2",
-    "database": "users",
+    "database": "postgres",
     "host": "localhost",
     "dialect": "postgres"
   },
   "test": {
     "username": "postgres",
     "password": "santhosh2",
-    "database": "users",
+    "database": "postgres",
     "host": "localhost",
     "dialect": "postgres"
   },
   "production": {
    "username": "postgres",
     "password": "santhosh2",
-    "database": "users",
+    "database": "postgres",
     "host": "localhost",
     "dialect": "postgres"
   }
