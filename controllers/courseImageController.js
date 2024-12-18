@@ -45,14 +45,14 @@ const courseImageController = {
   // Update image description
   async updateImage(req, res) {
     const { image_id } = req.params;
-    const { description } = req.body;
+    const { description,image } = req.body;
+
 
     try {
-      const image = await CourseImage.findByPk(image_id);
-      if (!image) return res.status(404).send("Image not found!");
-
-      await image.update({ description });
-      res.status(200).json({ message: "Image updated successfully!", image });
+      const images = await CourseImage.findByPk(image_id);
+      if (!images) return res.status(404).send("Image not found!");
+      await images.update({ description,image });
+      res.status(200).json({ message: "Image updated successfully!", images });
     } catch (err) {
       res.status(500).send(err.message);
     }

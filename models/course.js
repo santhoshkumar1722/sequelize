@@ -15,6 +15,16 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'instructor_id',
         onDelete: 'CASCADE',
       });
+      course.hasOne(models.course_image, {
+        foreignKey: 'course_id',
+        onDelete: 'CASCADE',
+      });
+
+      course.hasOne(models.course_content, {
+        foreignKey: 'course_id',
+        onDelete: 'CASCADE',
+      });
+      
     }
   }
   course.init({
@@ -33,12 +43,19 @@ module.exports = (sequelize, DataTypes) => {
     category: DataTypes.STRING,
     level: {
       type: DataTypes.ENUM('beginner', 'intermediate', 'advanced'),
+      defaultValue: 'beginner',
+
     },
     price: DataTypes.DECIMAL,
     discount: DataTypes.DECIMAL,
     status: {
       type: DataTypes.ENUM('draft', 'published', 'archiv	ed'),
       defaultValue: 'draft',
+    },
+    details: {
+      type: DataTypes.JSON,
+      allowNull: true,
+      defaultValue: {}, // Default value can be an empty object
     },
   }, {
     sequelize,

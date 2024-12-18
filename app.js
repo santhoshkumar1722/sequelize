@@ -16,17 +16,20 @@ const enrollmentRoutes = require("./routes/enrollmentRoutes");
 const courseRatingRoutes = require("./routes/courseRatingRoutes");
 const courseContentRoutes = require("./routes/courseContentRoutes");
 const courseImageRoutes = require("./routes/courseImageRoutes");
+const favoriteCourseRoutes = require("./routes/favoriteCourseRoutes");
 
 const app = express();
 
 // Middleware
-app.use(cors());
+app.use(cors({
+    origin: 'http://localhost:4200' // Allow requests from Angular frontend
+  }));
 app.use(bodyParser.json());
 
 // Routes
 app.use("/auth", authRoutes);
 app.use("/api",coursePromotionRoutes); 
-app.use("/api",courseRoutes);
+app.use("/admin",courseRoutes);
 app.use("/api",courseCategoryRoutes);
 app.use("/api",couponRoutes);
 app.use("/api", notificationRoutes);
@@ -39,5 +42,6 @@ app.use("/api", enrollmentRoutes);
 app.use("/api", courseRatingRoutes);
 app.use("/api", courseContentRoutes);
 app.use("/api", courseImageRoutes);
+app.use("/api", favoriteCourseRoutes);
 
 module.exports = app;

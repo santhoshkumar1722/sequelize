@@ -27,9 +27,6 @@ module.exports = {
       profile_picture: {
         type: Sequelize.BLOB
       },
-      // date_joined: {
-      //   type: Sequelize.DATE
-      // },
       user_role: {
         type: Sequelize.ENUM('student', 'instructor', 'admin'),
         defaultValue: 'student',
@@ -39,12 +36,6 @@ module.exports = {
         type: Sequelize.ENUM('active', 'inactive', 'banned'),
         defaultValue: 'active',
       },
-      // user_role: {
-      //   type: Sequelize.ENUM
-      // },
-      // status: {
-      //   type: Sequelize.ENUM
-      // },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

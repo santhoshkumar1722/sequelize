@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 
 const authMiddleware = (req, res, next) => {
-    const token = req.headers.authorization?.split(' ')[1]; // Get token from "Bearer <token>"
+    const token = req.headers['authorization']?.split(' ')[1]; // Get token from "Bearer <token>"
     if (!token) return res.status(401).send("Access token is missing!");
 
     try {

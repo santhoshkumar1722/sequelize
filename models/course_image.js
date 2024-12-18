@@ -23,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       references: {
         model: 'courses',
-        key: 'course_id',
+        key: 'id',
       },
       onDelete: 'CASCADE',
     },

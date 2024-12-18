@@ -3,7 +3,6 @@ const jwt = require("jsonwebtoken");
 const db = require("../models");
 const User = db.user;
 
-
 const authController = {
   async signup(req, res) {
     const { username, email, password, first_name, last_name, user_role } = req.body;
@@ -23,21 +22,23 @@ const authController = {
       res.status(500).send(err.message);
     }
   },
-  
+
   async login(req, res) {
     const { email, password } = req.body;
 
     try {
       const user = await User.findOne({ where: { email } });
       if (!user) return res.status(400).send("User not found!");
-      console.log(user.password);
-      console.log(password);
 
       const isMatch = await bcrypt.compare(password, user.password);
       if (!isMatch) return res.status(400).send("Invalid credentials!");
+      const expiresIn = "8h";
+      const secretKey = "your_secret_key";
+      const token = jwt.sign({ id: user.id }, secretKey, { expiresIn });
+      const expirationTimestamp = Math.floor(Date.now() / 1000) + (8 * 60 * 60); // Current time + 8 hours in seconds
 
-      const token = jwt.sign({ id: user.id }, "your_secret_key", { expiresIn: "8h" });
-      res.status(200).json({ token });
+      // const token = jwt.sign({ id: user.id }, "your_secret_key", { expiresIn: "8h" });
+      res.status(200).json({ token, user, expiresAt: expirationTimestamp });
     } catch (err) {
       res.status(500).send(err.message);
     }

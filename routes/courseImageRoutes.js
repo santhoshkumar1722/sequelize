@@ -3,7 +3,6 @@ const multer = require("multer");
 const courseImageController = require("../controllers/courseImageController");
 const authMiddleware = require("../middleware/authMiddleware");
 
-
 const upload = multer(); // Middleware for handling multipart/form-data
 
 const router = express.Router();

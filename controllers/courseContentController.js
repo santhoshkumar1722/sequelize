@@ -32,18 +32,28 @@ const courseContentController = {
     }
   },
 
-  // Get content by ID
-  async getContentById(req, res) {
-    const { content_id } = req.params;
+  async getContentByCourseId(req, res) {
+    const { course_id } = req.params;
 
     try {
-      const content = await CourseContent.findByPk(content_id);
-      if (!content) return res.status(404).send("Content not found!");
-      res.status(200).json(content);
+        // Fetch all content for the given course_id
+        const contents = await CourseContent.findAll({
+            where: { course_id }, // Filter by course_id
+            order: [['content_order', 'ASC']], // Order by content_order
+            attributes: ['id', 'content_type', 'title', 'description', 'file_url', 'content_order', 'duration'], // Select specific fields
+        });
+
+        if (contents.length === 0) {
+            return res.status(404).json({ message: "No content found for this course!" });
+        }
+
+        res.status(200).json(contents);
     } catch (err) {
-      res.status(500).send(err.message);
+        console.error("Error fetching content:", err);
+        res.status(500).json({ error: err.message });
     }
-  },
+},
+
 
   // Update content
   async updateContent(req, res) {
@@ -75,6 +85,7 @@ const courseContentController = {
       res.status(500).send(err.message);
     }
   },
+  
   
 };
 

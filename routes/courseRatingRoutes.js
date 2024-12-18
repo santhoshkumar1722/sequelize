@@ -2,7 +2,6 @@ const express = require("express");
 const courseRatingController = require("../controllers/courseRatingController");
 const authMiddleware = require("../middleware/authMiddleware");
 
-
 const router = express.Router();
 
 router.post("/course-ratings", authMiddleware,courseRatingController.createRating);
