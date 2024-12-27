@@ -22,7 +22,10 @@ const courseRatingController = {
   // Get all ratings
   async getAllRatings(req, res) {
     try {
-      const ratings = await CourseRating.findAll();
+      const ratings = await CourseRating.findAll(
+
+
+      );
       res.status(200).json(ratings);
     } catch (err) {
       res.status(500).send(err.message);
@@ -36,6 +39,36 @@ const courseRatingController = {
     try {
       const courseRating = await CourseRating.findByPk(rating_id);
       if (!courseRating) return res.status(404).send("Rating not found!");
+      res.status(200).json(courseRating);
+    } catch (err) {
+      res.status(500).send(err.message);
+    }
+  },
+
+  async getRatingByCourseId(req, res) {
+    const { course_id } = req.params;
+
+    try {
+      const courseRatings = await CourseRating.findAll({
+        where: { course_id },
+        attributes: ['rating']});
+        if (!courseRatings || courseRatings.length === 0) {
+          return res.status(404).send("Course ID not found or no ratings available!");
+        }
+    
+        // Calculate the average rating
+        const totalRatings = courseRatings.length;
+        const sumRatings = courseRatings.reduce((sum, item) => sum + item.rating, 0);
+        const averageRating = (sumRatings / totalRatings).toFixed(2); // Round to 2 decimal places
+    
+        // Send the response with individual ratings and the average
+        res.status(200).json({
+          course_id,
+          totalRatings,
+          averageRating,
+          ratings: courseRatings
+        });
+      // if (!courseRating) return res.status(404).send("Course id not found!");
       res.status(200).json(courseRating);
     } catch (err) {
       res.status(500).send(err.message);

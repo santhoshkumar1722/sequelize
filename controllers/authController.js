@@ -64,6 +64,49 @@ const authController = {
       res.status(500).send(err.message);
     }
   },
+  async getProfile(req, res) {
+    const userId = req.params.id;
+
+    try {
+      // Check if the logged-in user ID matches the requested user ID
+      if (parseInt(req.user.id) !== parseInt(userId)) {
+        return res.status(403).send("Access denied!");
+      }
+
+      // Fetch the user details, excluding the password
+      const user = await User.findByPk(userId, {
+        attributes: { exclude: ['password'] },
+      });
+      if (!user) return res.status(404).send('User not found!');
+
+      res.status(200).json(user);
+    } catch (err) {
+      res.status(500).send(err.message);
+    }
+  },
+  async getUserProfile(req, res) {
+    const userId = req.params.id;
+
+    try {
+      // if (!req.user) {
+      //   return res.status(401).send("Unauthorized: Access token is missing or invalid!");
+      // }
+      // Check if the logged-in user ID matches the requested user ID
+      // if (parseInt(req.user.id) !== parseInt(userId)) {
+      //   return res.status(403).send("Access denied!");
+      // }
+
+      // Fetch the user details, excluding the password
+      const user = await User.findByPk(userId, {
+        attributes: { exclude: ['password'] },
+      });
+      if (!user) return res.status(404).send('User not found!');
+
+      res.status(200).json(user);
+    } catch (err) {
+      res.status(500).send(err.message);
+    }
+  },
 
   async updateProfile(req, res) {
     const userId = req.params.id;

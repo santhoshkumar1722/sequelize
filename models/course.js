@@ -19,12 +19,16 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'course_id',
         onDelete: 'CASCADE',
       });
-
-      course.hasOne(models.course_content, {
+      course.hasMany(models.course_content, {
+        foreignKey: 'course_id',
+        onDelete: 'CASCADE',
+        as: 'CourseContents', // Alias for the relation
+      });
+      course.hasOne(models.course_rating, {
         foreignKey: 'course_id',
         onDelete: 'CASCADE',
       });
-      
+
     }
   }
   course.init({

@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.post('/courses', authMiddleware,authorizeAdmin,courseController.createCourse);
 router.get('/courses', authMiddleware,courseController.getCourses);
-router.get('/courses/:id', authMiddleware,courseController.getCourseById);
+router.get('/courses/:id', authMiddleware,courseController.getCourseWithContents);
 router.put('/courses/:id', authMiddleware,authorizeAdmin,courseController.updateCourse);
 router.delete('/courses/:id', authMiddleware,authorizeAdmin, courseController.deleteCourse);
 

@@ -7,6 +7,7 @@ const router = express.Router();
 router.post("/course-ratings", authMiddleware,courseRatingController.createRating);
 router.get("/course-ratings", authMiddleware,courseRatingController.getAllRatings);
 router.get("/course-ratings/:rating_id", authMiddleware,courseRatingController.getRatingById);
+router.get("/course-ratings/course/:course_id", authMiddleware,courseRatingController.getRatingByCourseId);
 router.put("/course-ratings/:rating_id", authMiddleware,courseRatingController.updateRating);
 router.delete("/course-ratings/:rating_id", authMiddleware,courseRatingController.deleteRating);
 
